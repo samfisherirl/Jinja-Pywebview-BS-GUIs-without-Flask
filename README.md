@@ -13,7 +13,8 @@ loading js and css happens in this custom code: https://github.com/samfisherirl/
 Very simply, before the index file loads, main.py loops through all files in /templates/. For all files with  *.css, they get read and inserted right before the  `</header>` tag. Same thing for js happens before end of `</body>` tag. 
 This includes bootstrap, js, jquery, all autoloaded into pywebview.
 
-![image](https://user-images.githubusercontent.com/98753696/220905717-1330f53d-030f-4073-90fc-ed3cbe01c9ca.png)
+ ![image](https://user-images.githubusercontent.com/98753696/220928356-187783ac-c764-4c68-b735-6ed1a6fa9963.png)
+
 
  ![image](https://user-images.githubusercontent.com/98753696/220921720-296a935a-f479-4761-b50c-f1b96ebe65fd.png)
 
