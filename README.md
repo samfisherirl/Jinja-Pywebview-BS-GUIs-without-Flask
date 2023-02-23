@@ -1,4 +1,4 @@
-# python-jinja2-with-CSS-and-JS-loader-template
+# python jinja2 and pywebview template with-CSS-and-JS-loader-template
 
 
 many changes upcoming but first push. 
