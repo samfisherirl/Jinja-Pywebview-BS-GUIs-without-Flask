@@ -15,13 +15,8 @@ This includes bootstrap, js, jquery, all autoloaded into pywebview.
 
 ![image](https://user-images.githubusercontent.com/98753696/220905717-1330f53d-030f-4073-90fc-ed3cbe01c9ca.png)
 
+![image](https://user-images.githubusercontent.com/98753696/220921557-31e89f0f-a0b0-4ac5-988c-32411f9b52a1.png)
 
-        words = ["this is a for loop", "this is a jinja for loop", "for loop 3", "for loop 4", "for loop 5", "for loop7"]
 
-        view = template.render(
-                words = words,
-                subtitle = "To render the variables, insert the placeholder between {{}}"
-                )
-
-![image](https://user-images.githubusercontent.com/98753696/220920671-d668a0fc-1968-47e5-b853-f2e14311edb3.png)
+![image](https://user-images.githubusercontent.com/98753696/220921326-9da8f698-16cf-4a4e-92ee-3fa03fcc1906.png)
 
