@@ -18,7 +18,5 @@ This includes bootstrap, js, jquery, all autoloaded into pywebview.
 
 ![image](https://user-images.githubusercontent.com/98753696/220928471-4b52921c-de4b-4a93-b31f-727b00139f58.png)
 
-
-
-![image](https://user-images.githubusercontent.com/98753696/220921326-9da8f698-16cf-4a4e-92ee-3fa03fcc1906.png)
+![image](https://user-images.githubusercontent.com/98753696/220928704-8516e7a8-3e47-42e6-bac8-5d80f8eeb95f.png)
 
