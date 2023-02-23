@@ -36,7 +36,7 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
                 data_obj_list.append(Data(path, filename, join(path, filename), x))
 
 
-finally, I add the list to the view:
+How I add the list to the view:
 
       view = template.render(
               data = data_obj_list,
