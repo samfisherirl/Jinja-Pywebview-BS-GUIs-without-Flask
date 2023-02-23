@@ -1,5 +1,5 @@
 # 
-# Automatically iterating over ./templates/ files and folders, looking for *.js and *.css files, importing before loading. 
+# This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
 
 
 many changes upcoming but first push. 
