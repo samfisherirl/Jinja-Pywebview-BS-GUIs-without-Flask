@@ -34,8 +34,21 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
             for filename in files:
                 x = x + 1
                 data_obj_list.append(Data(path, filename, join(path, filename), x))
-                
-index.html file:
+
+
+finally, I add the list to the view:
+
+      view = template.render(
+              data = data_obj_list,
+              )
+             
+      webview.create_window(windowTitle, html = view
+      
+      
+      
+                      
+finally, I add the list to the index file:
+       <tbody>
 
            {% for item in data %}
        <tr>
