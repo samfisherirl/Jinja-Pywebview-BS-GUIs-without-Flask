@@ -1,5 +1,5 @@
 # 
-# Pywebview + Jinja2 + autoload CSS and JS such as Bootstrap without restructuring standard website assets. 
+# Pywebview + Jinja2 + autoload CSS and JS (including Bootstrap) without restructuring standard website assets. 
 
  This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
 
