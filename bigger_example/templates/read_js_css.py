@@ -42,13 +42,15 @@ directory = str(getcwd())
 
 # iterate over files in
 # that directory
-for root, dirs, files in os.walk(directory):
-	for filename in files:
-		print(join(root, filename))
-		if ".css" in filename:
-			css_paths.append(join(root, filename))
-		if ".js" in filename:
-			js_paths.append(join(root, filename))
+
+def iter_files(directory):
+	for root, dirs, files in os.walk(directory):
+		for filename in files:
+			print(join(root, filename))
+			if ".css" in filename:
+				css_paths.append(join(root, filename))
+			if ".js" in filename:
+				js_paths.append(join(root, filename))
 
 def read_file_return_contents(i):
 	with open(i, 'r', errors='ignore') as f:
@@ -69,20 +71,19 @@ def read_css():
 		css = str(css + read_file_return_contents(i))
 	return str(css + f"\n</style>\n" + lookfor_css)
 
-file = join(directory, "templates", 'index_backup.html')
 
-def read_html():
-		file = join(directory, "templates", 'index_backup.html')
+def read_html(directory):
+		file = join(directory, 'index_backup.html')
 		
 		if exists(file):
-			file = join(directory, "templates", 'index_backup.html')
+			file = join(directory, 'index_backup.html')
 		else:
-			file = join(directory, "templates", 'index.html')
+			file = join(directory, 'index.html')
 
 		with open(file, 'r', errors="replace") as f:
 			export = f.read()
 			lines = export.split('\n')
-		with open(join(directory, "templates", 'index_backup.html'), 'w') as f:
+		with open(join(directory, 'index_backup.html'), 'w') as f:
 			f.write(export)	
 		return lines
 
@@ -112,13 +113,15 @@ def inserter(lines):
 
 
 
-def convert():
-	lines = read_html()
+def convert(directory):
+	directory = str(directory + "\\templates")
+	iter_files(directory)
+	lines = read_html(directory)
 	new_html = inserter(lines)
-	with open(join(directory, "templates", 'index.html'), 'w', errors="replace") as f:
+	with open(join(directory, 'index.html'), 'w', errors="replace") as f:
 		f.write("\n".join(new_html))
 
 if __name__ == '__main__':
-	convert()
+	convert(directory)
 
 
