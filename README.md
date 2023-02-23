@@ -15,7 +15,7 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
  ![image](https://user-images.githubusercontent.com/98753696/221052925-8b98d7c1-89ba-49d7-8dc7-925d247937cc.png)
 
- How the above data is created and displayed, first in python:
+See data table example for full code. First, How the above data is created and displayed in python:
 
 
     class Data:
@@ -47,7 +47,7 @@ How I add the list to the view:
       
       
                       
-finally, I add the list to the index file:
+finally, I add the list to the index.html file:
        <tbody>
 
            {% for item in data %}
