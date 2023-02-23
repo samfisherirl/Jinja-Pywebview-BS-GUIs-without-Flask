@@ -15,9 +15,4 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
  ![image](https://user-images.githubusercontent.com/98753696/221052925-8b98d7c1-89ba-49d7-8dc7-925d247937cc.png)
 
-
-
-![image](https://user-images.githubusercontent.com/98753696/220928471-4b52921c-de4b-4a93-b31f-727b00139f58.png)
-
-![image](https://user-images.githubusercontent.com/98753696/220928704-8516e7a8-3e47-42e6-bac8-5d80f8eeb95f.png)
-
+ 
