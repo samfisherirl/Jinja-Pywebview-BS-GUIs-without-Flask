@@ -15,7 +15,7 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
 ![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
 
-See data table example for full code. First, How the above data is created and displayed in python:
+See data table example for full code. In snippets, How the above data is created and displayed in python:
 
 
     class Data:
@@ -36,7 +36,7 @@ See data table example for full code. First, How the above data is created and d
                 data_obj_list.append(Data(path, filename, join(path, filename), x))
 
 
-How I add the list to the view:
+How I add render the view:
 
       view = template.render(
               data = data_obj_list,
