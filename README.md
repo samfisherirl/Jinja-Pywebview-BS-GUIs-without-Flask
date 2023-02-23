@@ -15,4 +15,32 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
  ![image](https://user-images.githubusercontent.com/98753696/221052925-8b98d7c1-89ba-49d7-8dc7-925d247937cc.png)
 
- 
+ How the above data is created and displayed, first in python:
+
+
+    class Data:
+        def __init__(self, columnone, columntwo, columnthree, x):
+            self.columnone = columnone
+            self.columntwo = columntwo
+            self.columnthree = columnthree
+            self.index = x
+
+    data_obj_list = []
+
+    def find_css_js_files(directory, filename):
+        global x
+        for root, dirs, files in walk(directory):
+            for filename in files:
+                x = x + 1
+                data_obj_list.append(Data(path, filename, join(path, filename), x))
+                
+index.html file:
+
+           {% for item in data %}
+       <tr>
+           <td>{{ item.index }}</td>
+           <td>{{ item.columnone }}</td>
+           <td>{{ item.columntwo }}</td>
+           <td>{{ item.columnthree }}</td>
+       </tr>
+           {% endfor %}
