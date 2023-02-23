@@ -1,8 +1,9 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
 import templates.read_js_css as read_js_css
+from os import getcwd
 
-read_js_css.convert()
+
 
 env = Environment(
                 loader = FileSystemLoader('templates'),
@@ -13,7 +14,9 @@ env = Environment(
 template = env.get_template("index.html")
 
 class Data:
-    word = "Dot Notation displayed"
+    title = "Dot notation title"
+    subtext = "This is a dot notation subtext"
+    title = "This is a dot notation title"
 
 
 words = ["this is a for loop", "this is a jinja for loop", "for loop 3", "for loop 4", "for loop 5", "for loop7"]
@@ -22,7 +25,7 @@ words = ["this is a for loop", "this is a jinja for loop", "for loop 3", "for lo
 #* Among the arguments of the render method I can pass data to be displayed in the 'templates' 
 #* The data can be of any type variables, lists, dictionaries, objects, json
 view = template.render(
-        title = Data(),
+        data = Data(),
         words = words,
         subtitle = "To render the variables, insert the placeholder between {{}}"
         )
@@ -35,7 +38,8 @@ print(view)
 
 if __name__ == "__main__":
     
-    read_js_css.convert()
+    directory = str(getcwd())
+    read_js_css.convert(directory)
 
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view)
