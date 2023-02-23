@@ -26,6 +26,7 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
             self.index = x
 
     data_obj_list = []
+    x = 0
 
     def find_css_js_files(directory, filename):
         global x
