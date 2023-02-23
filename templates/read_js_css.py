@@ -19,10 +19,10 @@
 # 
 # <HEAD> </HEAD>  - for css insertion
 # <BODY> </B
-
+import threading
 import os
 from os import getcwd
-import os.path
+from os.path import exists, join
 
 css_paths = []
 js_paths = []
@@ -40,7 +40,7 @@ lookfor_js = r"</body>"
 directory = str(getcwd())
 
 
- 
+
 # iterate over files in
 # that directory
 for root, dirs, files in os.walk(directory):
@@ -61,31 +61,42 @@ def read_js():
 	js = r"<script>"
 	for i in js_paths:
 		js = str(js + read_file_return_contents(i))
-	return str(js + "</script>" + lookfor_js)
+	return str(js + "</script>\n" + lookfor_js)
 
 
 def read_css():
 	css = r"<style>"
 	for i in css_paths:
 		css = str(css + read_file_return_contents(i))
-	return str(css + "</style>" + lookfor_css)
+	return str(css + "</style>\n" + lookfor_css)
 
 
 
 def read_html():
-	if os.path.exists(os.path.join(directory, "templates", 'index_backup.html')):
-		file = 'index_backup.html'
-	else:
-		file = 'index.html'
+		file = join(directory, "templates", 'index_backup.html')
+		
+		if exists(file):
+			file = join(directory, "templates", 'index_backup.html')
+		else:
+			file = join(directory, "templates", 'index.html')
 
-	with open(os.path.join(directory, "templates", file), 'r', errors="replace") as f:
-		export = f.read()
-		lines = export.split('\n')
-	with open('index_backup.html', 'w') as f:
-		f.write(export)	
-	return lines
+		with open(file, 'r', errors="replace") as f:
+			export = f.read()
+			lines = export.split('\n')
+		with open(join(directory, "templates", 'index_backup.html'), 'w') as f:
+			f.write(export)	
+		return lines
 
 
+threads = []
+returns = []
+
+def treds(lines):
+	for line in lines:
+		pass
+
+
+  
 def inserter(lines):
 	new_html = []
 	for line in lines:
