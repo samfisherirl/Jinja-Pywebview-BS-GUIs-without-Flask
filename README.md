@@ -6,9 +6,7 @@ many changes upcoming but first push.
 
 simple jinja usage, pywebview template, with CSS and JS loader. 
 
-!Important!
-Must use:     //{$insert_css$}
-               //{$insert_js$}
+loading js and css happens in: https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/blob/main/templates/read_js_css.py
 
 as markers to position imports of css and js. This includes bootstrap, js, jquery, all autoloaded into pywebview
 
