@@ -3,7 +3,14 @@ import webview
 import templates.inject_js_css as inject_js_css
 from os import getcwd
 
+# "directory" needs to be the parent path 
+# directly above the "templates" directory 
+# ie where your main file is located
 
+
+directory = str(getcwd())
+filename = "index.html"
+inject_js_css.convert(directory, filename)
 
 env = Environment(
                 loader = FileSystemLoader('templates'),
@@ -38,11 +45,7 @@ print(view)
 
 if __name__ == "__main__":
     
-    # "directory" needs to be the path directly above the "templates" directory
     
-    directory = str(getcwd())
-    
-    inject_js_css.convert(directory)
 
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view)

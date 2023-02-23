@@ -38,12 +38,12 @@ lookfor_js = r"</body>"
 # assign directory
 directory = str(getcwd())
 
-
+filename = 'index.html'
 
 # iterate over files in
 # that directory
 
-def find_css_js_files(directory):
+def find_css_js_files(directory, filename):
 	for root, dirs, files in os.walk(directory):
 		for filename in files:
 			print(join(root, filename))
@@ -72,18 +72,16 @@ def read_css():
 	return str(css + f"\n</style>\n" + lookfor_css)
 
 
-def read_index_html(directory):
-		file = join(directory, 'index_backup.html')
+def read_index_html(directory, filename):
+		file = join(directory, f'backup_{filename}')
 		
-		if exists(file):
-			file = join(directory, 'index_backup.html')
-		else:
-			file = join(directory, 'index.html')
+		if not exists(file):
+			file = join(directory, filename)
 
 		with open(file, 'r', errors="replace") as f:
 			export = f.read()
 			html_lines = export.split('\n')
-		with open(join(directory, 'index_backup.html'), 'w') as f:
+		with open(join(directory, f'backup_{filename}'), 'w') as f:
 			f.write(export)	
 		return html_lines
 
@@ -113,15 +111,15 @@ def insert_js_css(html_lines):
 
 
 
-def convert(directory):
+def convert(directory, filename):
 	directory = str(directory + "\\templates")
-	find_css_js_files(directory)
-	html_lines = read_index_html(directory)
+	find_css_js_files(directory, filename)
+	html_lines = read_index_html(directory, filename)
 	new_html = insert_js_css(html_lines)
-	with open(join(directory, 'index.html'), 'w', errors="replace") as f:
+	with open(join(directory, filename), 'w', errors="replace") as f:
 		f.write("\n".join(new_html))
 
 if __name__ == '__main__':
-	convert(directory)
+	convert(directory, filename)
 
 
