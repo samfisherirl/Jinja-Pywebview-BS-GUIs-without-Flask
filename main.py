@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-from templates import import_read_js_css
+from templates import read_js_css
 
 env = Environment(
                 loader = FileSystemLoader('templates'),
@@ -33,7 +33,7 @@ print(view)
 
 if __name__ == "__main__":
     
-    import_read_js_css.convert()
+    read_js_css.convert()
 
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view)
