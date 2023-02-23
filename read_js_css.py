@@ -19,7 +19,6 @@
 # 
 # <HEAD> </HEAD>  - for css insertion
 # <BODY> </B
-import threading
 import os
 from os import getcwd
 from os.path import exists, join
@@ -45,11 +44,11 @@ directory = str(getcwd())
 # that directory
 for root, dirs, files in os.walk(directory):
 	for filename in files:
-		print(os.path.join(root, filename))
+		print(join(root, filename))
 		if ".css" in filename:
-			css_paths.append(os.path.join(root, filename))
+			css_paths.append(join(root, filename))
 		if ".js" in filename:
-			js_paths.append(os.path.join(root, filename))
+			js_paths.append(join(root, filename))
 
 def read_file_return_contents(i):
 	with open(i, 'r', errors='ignore') as f:
@@ -58,19 +57,19 @@ def read_file_return_contents(i):
 
 
 def read_js():
-	js = r"<script>"
+	js = f"\n<script>\n"
 	for i in js_paths:
 		js = str(js + read_file_return_contents(i))
-	return str(js + "</script>\n" + lookfor_js)
+	return str(js + f"\n</script>\n" + lookfor_js)
 
 
 def read_css():
-	css = r"<style>"
+	css = f"\n<style>\n"
 	for i in css_paths:
 		css = str(css + read_file_return_contents(i))
-	return str(css + "</style>\n" + lookfor_css)
+	return str(css + f"\n</style>\n" + lookfor_css)
 
-
+file = join(directory, "templates", 'index_backup.html')
 
 def read_html():
 		file = join(directory, "templates", 'index_backup.html')
@@ -116,8 +115,8 @@ def inserter(lines):
 def convert():
 	lines = read_html()
 	new_html = inserter(lines)
-	with open('index.html', 'w', errors="replace") as f:
-		f.write("".join(new_html))
+	with open(join(directory, "templates", 'index.html'), 'w', errors="replace") as f:
+		f.write("\n".join(new_html))
 
 if __name__ == '__main__':
 	convert()
