@@ -1,4 +1,6 @@
-
+##########################################################################
+# this file needs to remain in the templates folder
+############################################################################
 # This script is used to combine all css and js files in the directory 
 # and its subdirectories into a single file (index.html)
 # It will also place all css and js at the bottom of the page, 
