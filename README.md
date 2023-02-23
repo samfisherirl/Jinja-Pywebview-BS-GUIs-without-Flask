@@ -1,5 +1,7 @@
 # python-jinja2-with-CSS-and-JS-loader-template
-python jinja2 with CSS and JS loader template
+
+
+many changes upcoming but first push. 
 
 simple jinja usage, pywebview template, with CSS and JS loader. Automatically iterating over templates files and folders. 
 
