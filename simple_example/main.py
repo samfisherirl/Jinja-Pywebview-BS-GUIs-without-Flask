@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-import templates.read_js_css as read_js_css
+import templates.inject_js_css as inject_js_css
 from os import getcwd
 
 
@@ -38,8 +38,11 @@ print(view)
 
 if __name__ == "__main__":
     
+    # "directory" needs to be the path directly above the "templates" directory
+    
     directory = str(getcwd())
-    read_js_css.convert(directory)
+    
+    inject_js_css.convert(directory)
 
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view)
