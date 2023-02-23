@@ -2,10 +2,12 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import webview
 import templates.read_js_css as read_js_css
 
+read_js_css.convert()
+
 env = Environment(
                 loader = FileSystemLoader('templates'),
                 autoescape=select_autoescape()
-)
+    )
 
 #* Retrieving the template using the get_template() method
 template = env.get_template("index.html")
