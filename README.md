@@ -1,5 +1,7 @@
 # 
-# This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
+# Pywebview, Jinja2, autoload CSS and JS without restructuring standard website assets. 
+
+ This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
 
 
 many changes upcoming, this is the first push and comes with many bugs but functions.  
