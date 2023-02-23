@@ -1,4 +1,25 @@
 
+# This script is used to combine all css and js files in the directory 
+# and its subdirectories into a single file (index.html)
+# It will also place all css and js at the bottom of the page, 
+# which is useful for loading pages.  
+# 
+# It will also create a backup of the original index.html file, 
+# and replace the original with the new one.  
+# 
+# 
+# 
+# This script is used in conjunction with the flask framework.  
+# It is designed to be run from the command line in the directory 
+# where the index.html file is located.  
+# 
+# 
+# 
+# The script will look for and use the following markers in the index.html file:
+# 
+# <HEAD> </HEAD>  - for css insertion
+# <BODY> </B
+
 import os
 from os import getcwd
 import os.path
