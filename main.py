@@ -1,6 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-from templates import read_js_css
+import templates.read_js_css as read_js_css
 
 env = Environment(
                 loader = FileSystemLoader('templates'),
