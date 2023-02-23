@@ -18,15 +18,12 @@ as markers to position imports of css and js. This includes bootstrap, js, jquer
 
         words = ["this is a for loop", "this is a jinja for loop", "for loop 3", "for loop 4", "for loop 5", "for loop7"]
 
-        #* With the render() method I render the template 
-        #* Among the arguments of the render method I can pass data to be displayed in the 'templates' 
-        #* The data can be of any type variables, lists, dictionaries, objects, json
         view = template.render(
                 title = Data(),
                 words = words,
                 subtitle = "To render the variables, insert the placeholder between {{}}"
                 )
 
+![image](https://user-images.githubusercontent.com/98753696/220905717-1330f53d-030f-4073-90fc-ed3cbe01c9ca.png)
 
-
-![image](https://user-images.githubusercontent.com/98753696/220868887-c0124c92-fbca-4646-ac30-b97b9106c3cd.png)
+ 
