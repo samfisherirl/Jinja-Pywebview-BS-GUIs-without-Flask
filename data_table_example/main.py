@@ -1,6 +1,7 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
 import templates.inject_js_css as inject_js_css
+import templates.loop_files_folders as loop_files_folders
 from os import walk, getcwd
 from os.path import join
 # "directory" needs to be the parent path 
@@ -20,28 +21,8 @@ env = Environment(
 #* Retrieving the template using the get_template() method
 template = env.get_template("index.html")
 
-x = 0
 
-class Data:
-    def __init__(self, columnone, columntwo, columnthree, x):
-        self.columnone = columnone
-        self.columntwo = columntwo
-        self.columnthree = columnthree
-        self.index = x
-
-data_obj_list = []
-
-def find_css_js_files(directory, filename):
-    global x
-    for root, dirs, files in walk(directory):
-        for filename in files:
-            x = x + 1
-            print(join(root, filename))
-            path = root.split("\\")
-            path = str(path[0] + "\\" + path[1] + "\\" + path[2] + "\\")
-            data_obj_list.append(Data(path, filename, join(path, filename), x))
-
-find_css_js_files(directory, filename)
+data_obj_list = loop_files_folders.find_css_js_files(directory, filename)
 
 words = ["this is a for loop", "this is a jinja for loop", "for loop 3", "for loop 4", "for loop 5", "for loop7"]
     
@@ -62,8 +43,6 @@ print(view)
 
 if __name__ == "__main__":
     
-    
-
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view, width = 1000, height = 600, resizable = True, fullscreen = False)
     webview.start()
