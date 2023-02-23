@@ -1,9 +1,10 @@
-# python jinja2 and pywebview template with-CSS-and-JS-loader-template
+# 
+#Automatically iterating over templates files and folders, looking for js and css files, importing before loading. 
 
 
 many changes upcoming but first push. 
 
-simple jinja usage, pywebview template, with CSS and JS loader. Automatically iterating over templates files and folders. 
+simple jinja usage, pywebview template, with CSS and JS loader. 
 
 !Important!
 Must use:     //{$insert_css$}
