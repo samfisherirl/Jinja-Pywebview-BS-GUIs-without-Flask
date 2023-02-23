@@ -38,7 +38,7 @@ view = template.render(
         )
 
 print(view)
-
+ 
 
 #* Extra: via the pywebview package I render the HTML I used 
 #* in the example

@@ -73,28 +73,21 @@ def read_css():
 
 
 def read_index_html(directory, filename):
-		file = join(directory, f'backup_{filename}')
-		
-		if not exists(file):
-			file = join(directory, filename)
-
-		with open(file, 'r', errors="replace") as f:
-			export = f.read()
-			html_lines = export.split('\n')
-		with open(join(directory, f'backup_{filename}'), 'w') as f:
-			f.write(export)	
-		return html_lines
-
-
-threads = []
-returns = []
-
-def treds(html_lines):
-	for line in html_lines:
-		pass
+	
+	file = join(directory, f'backup_{filename}')
+	if not exists(file):
+		file = join(directory, filename)
+	with open(file, 'r', errors="replace") as f:
+		export = f.read()
+		html_lines = export.split('\n')
+	# save backup of original 
+	with open(join(directory, f'backup_{filename}'), 'w') as f:
+		f.write(export)
+	return html_lines
 
 
-  
+
+
 def insert_js_css(html_lines):
 	new_html = []
 	for line in html_lines:
@@ -106,7 +99,6 @@ def insert_js_css(html_lines):
 			continue
 		else:
 			new_html.append(line)
-	
 	return new_html
 
 
