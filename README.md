@@ -4,11 +4,12 @@
 
 many changes upcoming but first push. 
 
-simple jinja usage, pywebview template, with CSS and JS loader. 
+simple jinja usage, pywebview template, with custom CSS and JS loader. 
 
-loading js and css happens in: https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/blob/main/templates/read_js_css.py
+loading js and css happens in this custom code: https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/blob/main/templates/read_js_css.py
 
-as markers to position imports of css and js. This includes bootstrap, js, jquery, all autoloaded into pywebview
+Very simply, before the index file loads, main.py loops through all files in /templates/. For all files with  *.css, they get read and inserted right before the "</header> tag. Same thing for js happens before end of </body> tag. 
+This includes bootstrap, js, jquery, all autoloaded into pywebview.
 
 ![image](https://user-images.githubusercontent.com/98753696/220867172-ea626610-6b0c-49c0-8fd6-6e24a2c94e56.png)
 
