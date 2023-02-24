@@ -1,5 +1,5 @@
 # 
-# Pywebview + Jinja2 + inject CSS and JS (including Bootstrap) without restructuring standard website assets. 
+# Inject CSS and JS (including Bootstrap) into  Pywebview + Jinja2 without flask or restructuring standard website assets. 
 
  This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
 
