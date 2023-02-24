@@ -17,7 +17,6 @@ Very simply, before the index file loads, main.py loops through all files in /te
 bootstrap, jquery all works, just place those files in the /template/ folder (anywhere, including "/templates/assets/bootstrap", keep your file structure as is) and that code will be injected before showing pywebview. Index backups are made to preserve original.
 
 
-
-![ezgif-5-e322ad2fd1](https://user-images.githubusercontent.com/98753696/221137768-99a601f1-9d4e-4479-a980-30047c1e7840.gif)
+ https://i.imgur.com/Cj5Dif9.gif
 
 
