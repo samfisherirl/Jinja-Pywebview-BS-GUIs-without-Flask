@@ -3,6 +3,7 @@ import webview
 import templates.inject_js_css as inject_js_css
 from os import getcwd
 
+import atexit
 # "directory" needs to be the parent path 
 # directly above the "templates" directory 
 # ie where your main file is located
