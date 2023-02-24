@@ -18,24 +18,8 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
 ![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
 
-See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>. In snippets, How the above data is created and displayed in python:
+See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>.  
 
-
- ![image](https://user-images.githubusercontent.com/98753696/221068841-15e4d2bd-c091-48c9-84cf-5a518d659b93.png)
-
-
-
-
-
-
-How I add render the view:
- 
- ![image](https://user-images.githubusercontent.com/98753696/221068247-3405b219-f85d-43b1-b86a-b1d7c1b94c88.png)
-
-      
-      
-      
-                      
-finally, I add the list to the index.html file:
 
 ![image](https://user-images.githubusercontent.com/98753696/221068165-a6798250-13d1-4e85-b1aa-1b5da9a06e6a.png)
+](https://i.imgur.com/ii9M91d.gif)
