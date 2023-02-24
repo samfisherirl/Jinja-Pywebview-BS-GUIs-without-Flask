@@ -17,9 +17,6 @@ Very simply, before the index file loads, main.py loops through all files in /te
 bootstrap, jquery all works, just place those files in the /template/ folder (anywhere, including "/templates/assets/bootstrap", keep your file structure as is) and that code will be injected before showing pywebview. Index backups are made to preserve original.
 
 ![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
+![ezgif-5-e322ad2fd1](https://user-images.githubusercontent.com/98753696/221137768-99a601f1-9d4e-4479-a980-30047c1e7840.gif)
 
-See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>.  
 
-
-![image](https://user-images.githubusercontent.com/98753696/221068165-a6798250-13d1-4e85-b1aa-1b5da9a06e6a.png)
-](https://i.imgur.com/ii9M91d.gif)
