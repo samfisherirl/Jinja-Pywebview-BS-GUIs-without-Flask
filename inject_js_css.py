@@ -99,7 +99,7 @@ def restore_backup():
     file = read_file_return_contents(
         str(directory_saved + f"\\backup_{filename}"))
     with open(str(directory_saved + f"\\{filename}"), 'w',
-              errors="ignore") as f:
+            errors="replace") as f:
         f.write(file)
 
 
