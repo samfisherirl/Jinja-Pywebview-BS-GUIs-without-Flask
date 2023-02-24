@@ -38,6 +38,10 @@ view = template.render(
         )
 
 print(view)
+
+
+def exit_handler():
+    inject_js_css.restore_backup()
  
 
 #* Extra: via the pywebview package I render the HTML I used 
@@ -45,8 +49,7 @@ print(view)
 
 if __name__ == "__main__":
     
-    
-
     windowTitle = "My window"
     webview.create_window(windowTitle, html = view)
     webview.start()
+    atexit.register(exit_handler)
