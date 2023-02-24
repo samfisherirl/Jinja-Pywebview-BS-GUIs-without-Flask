@@ -6,7 +6,7 @@ This solution takes Pywebview with Jinja2, and loops through all files in your .
 
 
 
-This is a new projects as of 2/23/23, expect small bugs and changes daily. 
+This is a new project as of 2/23/23, expect small bugs and changes daily. 
 
 #
 
