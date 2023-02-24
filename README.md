@@ -1,5 +1,5 @@
 # 
-# Pywebview + Jinja2 + autoload CSS and JS (including Bootstrap) without restructuring standard website assets. 
+# Pywebview + Jinja2 + inject CSS and JS (including Bootstrap) without restructuring standard website assets. 
 
  This will automatically iterate over files and folders in ./templates/, looking for *.js and *.css files, importing before loading. 
 
@@ -15,46 +15,24 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
 ![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
 
-See data table example for full code. In snippets, How the above data is created and displayed in python:
+See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>. In snippets, How the above data is created and displayed in python:
 
 
-    class Data:
-        def __init__(self, columnone, columntwo, columnthree, x):
-            self.columnone = columnone
-            self.columntwo = columntwo
-            self.columnthree = columnthree
-            self.index = x
+ ![image](https://user-images.githubusercontent.com/98753696/221068841-15e4d2bd-c091-48c9-84cf-5a518d659b93.png)
 
-    data_obj_list = []
-    x = 0
 
-    def find_css_js_files(directory, filename):
-        global x
-        for root, dirs, files in walk(directory):
-            for filename in files:
-                x = x + 1
-                data_obj_list.append(Data(path, filename, join(path, filename), x))
+
+
 
 
 How I add render the view:
+ 
+ ![image](https://user-images.githubusercontent.com/98753696/221068247-3405b219-f85d-43b1-b86a-b1d7c1b94c88.png)
 
-      view = template.render(
-              data = data_obj_list,
-              )
-             
-      webview.create_window(windowTitle, html = view
       
       
       
                       
 finally, I add the list to the index.html file:
-       <tbody>
 
-           {% for item in data %}
-       <tr>
-           <td>{{ item.index }}</td>
-           <td>{{ item.columnone }}</td>
-           <td>{{ item.columntwo }}</td>
-           <td>{{ item.columnthree }}</td>
-       </tr>
-           {% endfor %}
+![image](https://user-images.githubusercontent.com/98753696/221068165-a6798250-13d1-4e85-b1aa-1b5da9a06e6a.png)
