@@ -15,7 +15,7 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 
 ![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
 
-See data table example for full code. In snippets, How the above data is created and displayed in python:
+See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>. In snippets, How the above data is created and displayed in python:
 
 
  ![image](https://user-images.githubusercontent.com/98753696/221068841-15e4d2bd-c091-48c9-84cf-5a518d659b93.png)
