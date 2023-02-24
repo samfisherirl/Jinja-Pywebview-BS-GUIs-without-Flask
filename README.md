@@ -18,7 +18,8 @@ bootstrap, jquery all works, just place those files in the /template/ folder (an
 See data table example for full code. In snippets, How the above data is created and displayed in python:
 
 
- ![image](https://user-images.githubusercontent.com/98753696/221068572-7578736a-683d-481f-acb8-ace63368d96c.png)
+ ![image](https://user-images.githubusercontent.com/98753696/221068841-15e4d2bd-c091-48c9-84cf-5a518d659b93.png)
+
 
 
 
