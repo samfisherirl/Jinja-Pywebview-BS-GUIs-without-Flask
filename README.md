@@ -16,26 +16,8 @@ This is a new projects as of 2/23/23, expect small bugs and changes daily.
 Very simply, before the index file loads, main.py loops through all files in /templates/. For all files with  *.css, they get read and inserted right before the  `</header>` tag, inbetween `<style>`and `</style>`. Same thing for js happens before end of `</body>` tag. 
 bootstrap, jquery all works, just place those files in the /template/ folder (anywhere, including "/templates/assets/bootstrap", keep your file structure as is) and that code will be injected before showing pywebview. Index backups are made to preserve original.
 
-![image](https://user-images.githubusercontent.com/98753696/221055533-0f7fc5b9-58af-41db-9af6-39a8a9712ffc.png)
-
-See <a href="https://github.com/samfisherirl/Pywebview-and-Jinja2-with-CSS-and-JS-loader-template/tree/main/data_table_example">data table example for full code</a>. In snippets, How the above data is created and displayed in python:
 
 
- ![image](https://user-images.githubusercontent.com/98753696/221068841-15e4d2bd-c091-48c9-84cf-5a518d659b93.png)
+![ezgif-5-e322ad2fd1](https://user-images.githubusercontent.com/98753696/221137768-99a601f1-9d4e-4479-a980-30047c1e7840.gif)
 
 
-
-
-
-
-How I add render the view:
- 
- ![image](https://user-images.githubusercontent.com/98753696/221068247-3405b219-f85d-43b1-b86a-b1d7c1b94c88.png)
-
-      
-      
-      
-                      
-finally, I add the list to the index.html file:
-
-![image](https://user-images.githubusercontent.com/98753696/221068165-a6798250-13d1-4e85-b1aa-1b5da9a06e6a.png)
