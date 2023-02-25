@@ -20,7 +20,13 @@
 # <BODY> </B
 import os
 from os import getcwd
-from os.path import exists, join
+from os.path import exists, join, getsize
+from time import sleep
+from pathlib import Path 
+from settings import file_settings
+
+
+Files = file_settings()
 
 css_paths = []
 js_paths = []
@@ -32,23 +38,22 @@ lookfor_js = r"</body>"
 # DO NOT include <script> <style> for insert markers, these will be added for
 # marker locations. use outside of this is fine.
 
-# assign directory
-directory = str(getcwd())
+# assign directory 
 
 filename = 'index.html'
 
+log = Files.log
 # iterate over files in
 # that directory
 
 
-def find_css_js_files(directory, filename):
-    for root, dirs, files in os.walk(directory):
-        for filename in files:
-            print(join(root, filename))
-            if ".css" in filename:
-                css_paths.append(join(root, filename))
-            if ".js" in filename:
-                js_paths.append(join(root, filename))
+def find_css_js_files():
+    for file in Files.dir.rglob("*"):
+        print(file) 
+        if file.suffix == ".css":
+            css_paths.append(file)
+        if file.suffix  == ".js":
+            js_paths.append(file)
 
 
 def read_file_return_contents(file):
@@ -56,50 +61,54 @@ def read_file_return_contents(file):
         return f.read()
 
 
-def read_js():
+def read_js(line):
     js = f"\n<script>\n"
     for file in js_paths:
         js = str(js + read_file_return_contents(file))
-    return str(js + f"\n</script>\n" + lookfor_js)
+    return str(js + f"\n</script>\n" + line)
 
 
-def read_css():
+def read_css(line):
     css = f"\n<style>\n"
     for file in css_paths:
         css = str(css + read_file_return_contents(file))
-    return str(css + f"\n</style>\n" + lookfor_css)
+    return str(css + f"\n</style>\n" + line)
 
 
-def read_index_html(directory, filename):
-    file = join(directory, f'backup_{filename}')
-    if not exists(file):
-        file = join(directory, filename)
-    with open(file, 'r', errors="replace") as f:
+def find_larger_size(): 
+    backupsize = Path(Files.bpath).stat().st_size
+    fsize = Path(Files.fpath).stat().st_size
+    
+    if (int(backupsize) > int(fsize)):
+        return Files.fpath
+    else:
+        return Files.bpath
+
+
+def read_index_html():
+    file = find_larger_size() 
+    with open(Files.fpath, 'r', errors="replace") as f:
         export = f.read()
         html_lines = export.split('\n')
     # save backup of original
-    with open(join(directory, f'backup_{filename}'), 'w') as f:
+    with open(Files.bpath, 'w') as f:
         f.write(export)
     return html_lines
 
 
 def access_directory():
-    global directory_saved
-    return directory_saved
+    return read_file_return_contents(Files.log)
 
 
-def save_directory(path, file):
-    global directory_saved, filename
-    directory_saved = path
-    filename = file
+# def save_directory(path, file):
+#     with open(log, 'w') as f:
+#         f.write(f'{path},{file}')
 
 
 def restore_backup():
-    global directory_saved, filename
-    file = read_file_return_contents(
-        str(directory_saved + f"\\backup_{filename}"))
-    with open(str(directory_saved + f"\\{filename}"), 'w',
-            errors="replace") as f:
+    file = read_file_return_contents(Files.bpath)
+    with open(Files.fpath, 'w',
+            errors="ignore") as f:
         f.write(file)
 
 
@@ -107,25 +116,26 @@ def insert_js_css(html_lines):
     new_html = []
     for line in html_lines:
         if lookfor_css in line:
-            new_html.append(read_css())  # insert css on marker
+            new_html.append(read_css(line))  # insert css on marker
             continue
         elif lookfor_js in line:
-            new_html.append(read_js())  # insert js on marker
+            new_html.append(read_js(line))  # insert js on marker
             continue
         else:
             new_html.append(line)
     return new_html
 
 
-def convert(directory, filename):
-    directory = str(directory + "\\templates")
-    save_directory(str(directory), filename)
-    find_css_js_files(directory, filename)
-    html_lines = read_index_html(directory, filename)
+def convert(Files):
+    directory = Files.dir
+    find_css_js_files()
+    html_lines = read_index_html()
     new_html = insert_js_css(html_lines)
-    with open(join(directory, filename), 'w', errors="replace") as f:
+    with open(Files.fpath, 'w', errors="replace") as f:
         f.write("\n".join(new_html))
 
 
 if __name__ == '__main__':
-    convert(directory, filename)
+    convert(Files)
+    sleep(2)
+    restore_backup()
