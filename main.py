@@ -9,17 +9,14 @@ import atexit
 from os.path import join
 
 
- #########################################
 #########################################
-# directory = 'templates' 
-# folder of html / css
-# directly below main.py
+#########################################
 
-from templates.settings import file_settings
+from templates.settings import file_settings as file_settings
 
 #########################################
 
-# file_settings.py located in main.py folder
+# file_settings.py located in /templates/ folder
 
 Files = file_settings()
 
@@ -65,7 +62,7 @@ def exit_handler():
 
 def start_window():
     windowTitle = "My window"
-    webview.create_window(windowTitle, html=view, width=1400, height=900, fullscreen=False)
+    webview.create_window(windowTitle, html=view, width=1100, height=900, fullscreen=False)
     webview.start()
     atexit.register(exit_handler)
 
