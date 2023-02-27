@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    //{$insert_css$}
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-   {% for word in words %}
-    <h1>{{ word }}</h1>
-    {% endfor %}    
 
-    <h1>{{title.word}}</h1>
-    <h3>{{subtitle}}</h3>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div>
     <p>
-      This displays simple Jinja with CSS, JS, and Jinja templates.
+      {{ title }}
     </p>
-  </body>
-  //{$insert_js$}
+    <select name="process" id="process" multiple="">
+      <optgroup label="These for loop items" name="">
+        {% for i in data %}
+        <option value="{{i.item}}" selected="" id="items">{{ i.item }}</option>
+        {% endfor %}
+      </optgroup>
+    </select>
+    <br><br>
+    <button type="button" id="submit">Submit</button>
+  </div>
+  <br><br>
+  {% for items in list %}
+  <p>
+    {{ items }}
+  </p>
+  {% endfor %}
+</body>
+
 </html>
