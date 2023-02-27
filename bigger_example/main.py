@@ -3,7 +3,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import webview
 import templates.inject_js_css as inject_js_css
 from os import walk, getcwd
-import running_processes_and_paths as processes
+import templates.running_processes_and_paths as processes
 import atexit
 
 from os.path import join
@@ -62,7 +62,7 @@ def exit_handler():
 
 def start_window():
     windowTitle = "My window"
-    webview.create_window(windowTitle, html=view, width=1100, height=900, fullscreen=False)
+    webview.create_window(windowTitle, html=view, width=800, height=600, fullscreen=False)
     webview.start()
     atexit.register(exit_handler)
 

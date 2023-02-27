@@ -3,7 +3,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import webview
 import templates.inject_js_css as inject_js_css
 from os import walk, getcwd
-import running_processes_and_paths as processes
+import templates.running_processes_and_paths as processes
 import atexit
 
 from os.path import join

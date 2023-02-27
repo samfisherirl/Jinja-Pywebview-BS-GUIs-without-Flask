@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{{data.title}}</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Contact-Form-by-Moorcam.css">
+</head>
+
+<body>
+    <section class="shadow contact-clean" style="background: rgb(3,77,139);">
+        <form class="bg-light border rounded border-secondary shadow-lg" method="post" style="background: rgb(248,248,249);">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" id="item-1-1-tab" role="tab" aria-controls="item-1-1" aria-selected="true" href="#item-1-1" data-bs-toggle="tab" style="padding-right: 12px;padding-left: 12px;">First Item</a></li>
+                        <li class="nav-item"><a class="nav-link" id="item-1-2-tab" role="tab" aria-controls="item-1-2" aria-selected="false" href="#item-1-2" data-bs-toggle="tab" style="padding-right: 4px;padding-left: 4px;">Second Item</a></li>
+                        <li class="nav-item"><a class="nav-link" id="item-1-3-tab" role="tab" aria-controls="item-1-3" aria-selected="false" href="#item-1-3" data-bs-toggle="tab" style="padding-right: 4px;padding-left: 4px;">Third Item</a></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div id="nav-tabContent" class="tab-content">
+                        <div id="item-1-1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="item-1-1-tab">
+                            <h4>{{data.title}}</h4>
+                            <div class="form-group mb-3"><select class="form-select" multiple="">
+                                    <optgroup label="This is a group">
+                                	   {% for word in words %}
+                                        <option value="{{ word }}" selected="">{{ word }}</option>
+                                        {% endfor %}    
+
+                                    </optgroup>
+                                </select></div>
+                            <p>{{data.subtext}}</p><button class="btn btn-primary" type="button">Launch</button>
+                        </div>
+                        <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
+                            <h4>Second Item Title</h4>
+                            <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
+                        </div>
+                        <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
+                            <h4>Third Item Title</h4>
+                            <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><button class="btn btn-primary" type="button">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
