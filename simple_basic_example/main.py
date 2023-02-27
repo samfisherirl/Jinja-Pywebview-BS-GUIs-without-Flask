@@ -69,7 +69,7 @@ def exit_handler():
 
 def start_window():
     windowTitle = "My window"
-    webview.create_window(windowTitle, html=view, width=1100, height=900, fullscreen=False)
+    webview.create_window(windowTitle, html=view, width=500, height=600, fullscreen=False)
     webview.start()
     atexit.register(exit_handler)
 
