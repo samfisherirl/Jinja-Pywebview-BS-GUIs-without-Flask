@@ -23,10 +23,10 @@ class Paths(Tag):
             return f.read()
             
     def construction(self):
-        string = ""
+        string = f"{self.open}"
         for file in self.paths:
-            string = str(f"{self.open}" + self.read_file_(file) + f"{self.close}" + "\n\n\n")
-        self.code = string
+            string = str(string + self.read_file_(file) + "\n")
+        self.code = str(string + f"{self.close}" + self.lookfor_)
 
 class Html:
     def __init__(self):

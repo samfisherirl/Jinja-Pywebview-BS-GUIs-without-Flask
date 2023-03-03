@@ -80,7 +80,6 @@ def read_js_css(line, scriptor, paths):
 
 def css_search(line):
         if css.lookfor_ in line:
-            Html.header_(line)
             css.construction()
             return True
         else:
@@ -89,7 +88,6 @@ def css_search(line):
 
 def js_search(line):
         if js.lookfor_ in line:
-            Html.body_(line)
             js.construction()
             return True
         else:
@@ -135,10 +133,10 @@ def restore_backup():
 def read_index_html():
     filesize = get_file_size(Files.fpath)
     bsize = get_file_size(Files.backup)
-    if filesize > 100000 and bsize > 0:
-        export = read_file_(Files.backup)
-    else:
+    if filesize > 100000 and filesize > 0:
         export = read_file_(Files.fpath)
+    else:
+        export = read_file_(Files.backup)
 
     # save backup of original
     with open(Files.temp, 'w', encoding='utf-8', errors='replace') as f:
@@ -180,15 +178,14 @@ def convert(Files):
             f"{js.code}"
             f"{Html.get_footer()}")
 
-    minified = minify_html.minify(html_file, minify_js=False, remove_processing_instructions=False)
-    writer(Files.fpath, minified)
+    html_file = minify_html.minify(html_file, minify_js=False, remove_processing_instructions=False)
+    writer(Files.fpath, html_file)
     return html_file
 
 if __name__ == '__main__':
     html_file = convert(Files)
     x = 0
 
-    remove(Files.temp)
     # writer('index_mini.html', minified)
     for line in html_file.splitlines():
         x += 1
