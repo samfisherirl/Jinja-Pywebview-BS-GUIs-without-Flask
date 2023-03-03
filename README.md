@@ -4,8 +4,11 @@
 This solution takes Pywebview with Jinja2, and loops through all files in your ./assets/ or ./templates/ looking for any file with *.js and *.css extensions. Read, and inject the code into (eg.) index.html prior to Pywebview displaying in Webview. 
 
 Rquired: 
+
 -Jinja2
+
 -Python 3.10
+
 -minify-html
 
 
