@@ -25,22 +25,6 @@ class Apps:
         self.id = id
 
 
-def return_object(process, Data):
-    print(process)
-    response = {
-        'message': 'Hello {}!'.format(process)
-    }
-    # print(response)
-    for k, i in Data.items():
-        if int(i.id) == int(process.strip()):
-            print(i.title)
-            print(i.title)
-            print(i.title)
-    # [print(i.title) for k, i in Data.items() if int(i.id) == int(process.strip())]
-
-    return response
-
-
 
 def construct_app_obj(desc, path):
     # matches paths within powershell output
@@ -53,10 +37,10 @@ def construct_app_obj(desc, path):
         path = str(f'{line[1]}:{line[2]}')
         exe = path.split("\\")
         exe = (exe[(len(exe)) - 1])
-        title = str(desc.split(':')[1].strip())
+        title = str(desc.split(':')[1].strip()).strip("\r\n")
         if title != "":
             app = Apps(
-                title,
+                title.replace("\\r\\n", ""),
                 path.strip(),
                 exe.strip(),
                 int(x)
@@ -73,8 +57,8 @@ def construct_app_obj(desc, path):
 def powershell():
     cmd = 'powershell "gps | where {$_.MainWindowTitle } | select Description,Id,Path | Format-List'
     proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    return [line.decode().rstrip() for line in proc.stdout]
-
+    return [line.decode("utf-8", errors="replace") for line in proc.stdout]
+    
 
 def loop_output(output_text):
     x = 0
@@ -97,6 +81,7 @@ def loop_output(output_text):
 1. The function get() returns the list of all installed applications
 2. The function powershell() runs the powershell command and returns the output as a list
 3. The function loop_output() loops through the output and returns a list of all installed applications """
+
 
 
 def get():
