@@ -2,7 +2,7 @@ from pathlib import Path
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
 from templates import inject_js_css
-import running_processes_and_paths as processes
+from templates import running_processes_and_paths as processes
 import atexit
 import sys
 from templates import handle_javascript
