@@ -25,6 +25,23 @@ class Apps:
         self.id = id
 
 
+def return_object(process, Data):
+    print(process)
+    response = {
+        'message': 'Hello {}!'.format(process)
+    }
+    # print(response)
+    for k, i in Data.items():
+        if int(i.id) == int(process.strip()):
+            print(i.title)
+            print(i.title)
+            print(i.title)
+    # [print(i.title) for k, i in Data.items() if int(i.id) == int(process.strip())]
+
+    return response
+
+
+
 def construct_app_obj(desc, path):
     # matches paths within powershell output
     #
@@ -64,7 +81,7 @@ def loop_output(output_text):
     apps = {}
     app_dic = {}
     for powershell_line in output_text:
-        if check_for_description(powershell_line) == True:
+        if check_for_description(powershell_line):
             app_dic = construct_app_obj(
                 output_text[x],
                 str(f'{output_text[x + 2]}'))
@@ -83,7 +100,6 @@ def loop_output(output_text):
 
 
 def get():
-    apps = []
     output_text = powershell()
     # [print(output_text) for output_text in output_text]
     apps = loop_output(output_text)
@@ -94,3 +110,5 @@ if __name__ == '__main__':
     cls = get()
     for i in cls.keys():
         print(cls[i].title)
+
+

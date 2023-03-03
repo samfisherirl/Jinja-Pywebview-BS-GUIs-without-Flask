@@ -18,30 +18,24 @@
 #
 # <HEAD> </HEAD>  - for css insertion
 # <BODY> </B>
-from os import remove
 
-import html
 import minify_html
 
-import os
-from os import getcwd
-from os.path import exists, getsize
 from time import sleep
 from pathlib import Path
 
 try:
     from templates.settings import file_settings
-    from templates.class_construction import Tag, Paths, Html
+    from templates.class_construction import JS_CSS, Html
 except:
     from settings import file_settings
-    from class_construction import Tag, Paths, Html
+    from class_construction import JS_CSS, Html
 
-Files = file_settings()
+Files = file_settings() 
 
-css_paths = []
-js_paths = []
-
-Html = Html()
+Html_header = Html()
+Html_body = Html()
+Html_footer = Html()
 
 
 # Use these literal markers as places for respective cod3e
@@ -54,8 +48,8 @@ filename = 'index.html'
 
 log = Files.log
 
-js = Paths('\n<script>\n', "\n</script>\n", r"</body>")
-css = Paths('\n<style>\n', "\n</style>\n", r"</head>")
+js = JS_CSS('\n<script>\n', "\n</script>\n", r"</body>")
+css = JS_CSS('\n<style>\n', "\n</style>\n", r"</head>")
 
 
             
@@ -83,7 +77,7 @@ def css_search(line):
             css.construction()
             return True
         else:
-            Html.header_(line)
+            Html_header.add_line(line)
             return False
 
 def js_search(line):
@@ -91,18 +85,28 @@ def js_search(line):
             js.construction()
             return True
         else:
-            Html.body_(line)
+            Html_body.add_line(line)
             return False
 
 
 
 def get_file_size(filename):
     try:
-        return Path(filename).stat().st_size
+        return JS_CSS(filename).stat().st_size
     except:
         return 0
 
-
+def demo_print_code(html_file):
+    x = 0
+    print("\n\n\n=> printing code line by line")
+    for i in range(5):
+        y = 5 - int(i)
+        print(f"=>{y}")
+        sleep(1)
+    for line in html_file.splitlines():
+        x += 1
+        print(f"{x} => {line}")
+        sleep(0.1)
 # The code then checks if there are any files with a size greater than 100000 bytes, and if so it deletes them.
 # If the terminal is closed without saving, the backup is not restored. To ensure doubling of injection, it 
 # will clean the index file, as well  as leave markers on the index file as breadcrums
@@ -131,18 +135,21 @@ def restore_backup():
         return
 
 def read_index_html():
-    filesize = get_file_size(Files.fpath)
-    bsize = get_file_size(Files.backup)
-    if filesize > 100000 and filesize > 0:
+    try:
+        bsize = get_file_size(Files.backup)
+        filesize = get_file_size(Files.fpath)
+    except:
+        filesize = get_file_size(Files.fpath)
+    try:
+        if filesize < 100000 and filesize > 0:
+            export = read_file_(Files.fpath)
+        else:
+            export = read_file_(Files.backup)
+    except:
         export = read_file_(Files.fpath)
-    else:
-        export = read_file_(Files.backup)
-
     # save backup of original
-    with open(Files.temp, 'w', encoding='utf-8', errors='replace') as f:
-        f.write(str(export))
-    with open(Files.backup, 'w', encoding='utf-8', errors='replace') as f:
-        f.write(str(export))
+    writer(Files.temp, export)
+    writer(Files.backup, export)
     return str(export).split('\n')
 
 
@@ -156,7 +163,7 @@ def find_css_js_files():
 
 
 
-def segment_html(html_lines):
+def insert_html(html_lines):
     css_found = False
     js_found = False
     for line in html_lines: 
@@ -165,34 +172,28 @@ def segment_html(html_lines):
         elif css_found and not js_found:
             js_found = js_search(line)
         else:
-            Html.footer_(line)
+            Html_footer.add_line(line)
+    Html_header.join_lines()
+    Html_body.join_lines()
+    Html_footer.join_lines()
 
 
 def convert(Files):
     find_css_js_files()
     html_lines = read_index_html()
-    segment_html(html_lines)
-    html_file = str(f"{Html.get_header()}"
+    insert_html(html_lines)
+    html_file = str(f"{Html_header.code}"
             f"{css.code}"
-            f"{Html.get_body()}"
+            f"{Html_body.code}"
             f"{js.code}"
-            f"{Html.get_footer()}")
+            f"{Html_footer.code}")
 
-    html_file = minify_html.minify(html_file, minify_js=False, remove_processing_instructions=False)
+    html_file = minify_html.minify(html_file)
     writer(Files.fpath, html_file)
     return html_file
 
+
 if __name__ == '__main__':
     html_file = convert(Files)
-    x = 0
-
-    # writer('index_mini.html', minified)
-    for line in html_file.splitlines():
-        x += 1
-        print(f"{x} => {line}")
-        sleep(0.01)
-    # #####################################
-    # #####################################
+    demo_print_code(html_file)
     restore_backup()
-    # #####################################
-    # #####################################

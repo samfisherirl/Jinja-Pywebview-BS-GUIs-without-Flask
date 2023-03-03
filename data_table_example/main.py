@@ -1,9 +1,9 @@
 from pathlib import Path
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-import templates.inject_js_css as inject_js_css
+from templates import inject_js_css as inject_js_css
 from os import walk, getcwd
-import templates.running_processes_and_paths as processes
+from templates import running_processes_and_paths
 import atexit
 
 from os.path import join
@@ -26,12 +26,12 @@ inject_js_css.convert(Files)
 ######################################### 
 
 ###########running_processes############# 
-data = processes.get()
+data = running_processes_and_paths.get()
 ######################################### 
 
 # Create the environment
 env = Environment(
-    loader=FileSystemLoader(Files.dir),
+    loader=FileSystemLoader('templates'),
     autoescape=select_autoescape()
 )
 
@@ -63,6 +63,7 @@ def exit_handler():
 def start_window():
     windowTitle = "My window"
     webview.create_window(windowTitle, html=view, width=1100, height=900, fullscreen=False)
+    inject_js_css.restore_backup()
     webview.start()
     atexit.register(exit_handler)
 
