@@ -43,9 +43,8 @@ class Html:
 
 if __name__ == '__main__':
     js = JS_CSS('\n<script>\n', "\n</script>\n", r"</body>")
-    js.pather('nadjgklkjasdfgksdlf')
-    js.construction(["1.txt", "1.txt"])
-    print(js.open)
-    print(js.open)
-    print(js.return_paths)
+    js.pather("index.html")
+    js.pather("backup_index.html")
+    js.construction()
+    print(js.code)
 

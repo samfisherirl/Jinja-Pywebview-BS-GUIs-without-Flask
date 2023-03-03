@@ -52,8 +52,8 @@
     function initialize() {
   var x = document.getElementById("process").selectedIndex;
   var y = document.getElementById("process").options;
-  alert("Index: " + y[x].index + " is ID number " + y[x].value);
-  pywebview.api.launch(y[x].value)
+  alert("JS Index: " + y[x].index + " is Python ID number " + y[x].value + ". See terminal for path.");
+  pywebview.api.launch_live_process(y[x].value)
     }</script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

@@ -67,9 +67,6 @@ def read_file_(file):
         return str(f.read())
 
 
-def read_js_css(line, scriptor, paths):
-    for file in js_paths:
-        pass
 
 
 def css_search(line):
@@ -188,7 +185,7 @@ def convert(Files):
             f"{js.code}"
             f"{Html_footer.code}")
 
-    html_file = minify_html.minify(html_file)
+    html_file = minify_(html_file)
     writer(Files.fpath, html_file)
     return html_file
 
