@@ -1,12 +1,12 @@
 from pathlib import Path
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-import templates.inject_js_css as inject_js_css 
+from templates import inject_js_css as inject_js_css 
 import atexit
 
 ######################################### 
 
-from settings import file_settings
+from templates.settings import file_settings
 
 Files = file_settings()
 

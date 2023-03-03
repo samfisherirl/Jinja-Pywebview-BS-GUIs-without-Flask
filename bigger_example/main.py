@@ -1,15 +1,12 @@
 from pathlib import Path
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import webview
-import templates.inject_js_css as inject_js_css
-from os import walk, getcwd
-import templates.running_processes_and_paths as processes
+from templates import inject_js_css
+import running_processes_and_paths as processes
 import atexit
+import sys
+from templates import handle_javascript
 
-from os.path import join
-
-
-#########################################
 #########################################
 
 from templates.settings import file_settings as file_settings
@@ -25,47 +22,51 @@ Files = file_settings()
 inject_js_css.convert(Files)
 ######################################### 
 
-###########running_processes############# 
-data = processes.get()
+# ##########_running_processes_###########
+
+Data = processes.get()
 ######################################### 
 
 # Create the environment
 env = Environment(
-    loader=FileSystemLoader(Files.dir),
+    loader=FileSystemLoader('templates'),
     autoescape=select_autoescape()
 )
-
-
 
 # Get the template file
 template = env.get_template(Files.fname)
 
-# Create the list of words for the for loop
-words = ["this is a for loop", "this is a jinja for loop", "for loop 3"]
-
-
-
-
 # Render the HTML with the for loop and the CSS/JS files
 view = template.render(
-        data = data,
-        words = words,
-        subtitle = "To render the variables, insert the placeholder between {{}}"
-        )
+    data=Data,
+    subtitle="To render the variables, insert the placeholder between {{}}"
+    )
+
 
 # Print the rendered HTML
+class API:
+    def __init__(self):
+        self.x = ''
+
+    def launch_live_process(self, process):
+        response = processes.return_object(process[0], Data)
+        return response
+
+    def error(self):
+        raise Exception('This is a Python exception')
 
 
 # Exit handler to restore the original HTML file
 def exit_handler():
     inject_js_css.restore_backup()
 
-def start_window():
-    windowTitle = "My window"
-    webview.create_window(windowTitle, html=view, width=800, height=600, fullscreen=False)
-    webview.start()
-    atexit.register(exit_handler)
 
+def start_window():
+    api = API()
+    windowTitle = "My window"
+    webview.create_window(windowTitle, html=view, width=700, height=700, fullscreen=False, js_api=api)
+    webview.start(debug=True)
+    atexit.register(exit_handler)
 
 
 def main():

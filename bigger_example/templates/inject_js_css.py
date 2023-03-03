@@ -17,34 +17,32 @@
 # The script will look for and use the following markers in the index.html file:
 #
 # <HEAD> </HEAD>  - for css insertion
-# <BODY> </B
+# <BODY> </B>
+from os import remove
+
+import html
+import minify_html
+
 import os
 from os import getcwd
 from os.path import exists, getsize
 from time import sleep
-from pathlib import Path 
+from pathlib import Path
+
 try:
     from templates.settings import file_settings
-except: 
+    from templates.class_construction import Tag, Paths, Html
+except:
     from settings import file_settings
-
-
+    from class_construction import Tag, Paths, Html
 
 Files = file_settings()
 
 css_paths = []
 js_paths = []
 
-lookfor_css = r"</head>"
-lookfor_js = r"</body>"
+Html = Html()
 
-marker_start = """
-<!-- marker...start...  -->
-"""
-
-marker_end =  """
-<!-- marker...end... -->
-"""
 
 # Use these literal markers as places for respective cod3e
 # DO NOT include <script> <style> for insert markers, these will be added for
@@ -55,36 +53,48 @@ marker_end =  """
 filename = 'index.html'
 
 log = Files.log
+
+js = Paths('\n<script>\n', "\n</script>\n", r"</body>")
+css = Paths('\n<style>\n', "\n</style>\n", r"</head>")
+
+
+            
+def writer(name, content):
+    with open(name, 'w', encoding='utf-8', errors="replace") as f:
+        f.write(content)
+
+
 # iterate over files in
 # that directory
 
 
-def find_css_js_files():
-    for file in Files.dir.rglob("*"):
-        print(file) 
-        if file.suffix == ".css":
-            css_paths.append(file)
-        if file.suffix  == ".js":
-            js_paths.append(file)
-
-
 def read_file_(file):
-    with open(file, 'r', errors='ignore') as f:
-        return f.read()
+    with open(file, 'r', errors='replace', encoding='utf-8') as f:
+        return str(f.read())
 
 
-def read_js(line):
-    js = f"\n<script>\n"
+def read_js_css(line, scriptor, paths):
     for file in js_paths:
-        js = str(js + read_file_(file))
-    return str(js + f"\n</script>\n" + lookfor_js)
+        pass
 
 
-def read_css(line):
-    css = f"\n<style>\n"
-    for file in css_paths:
-        css = str(css + read_file_(file))
-    return str(css + f"\n</style>\n" + lookfor_css)
+def css_search(line):
+        if css.lookfor_ in line:
+            css.construction()
+            return True
+        else:
+            Html.header_(line)
+            return False
+
+def js_search(line):
+        if js.lookfor_ in line:
+            js.construction()
+            return True
+        else:
+            Html.body_(line)
+            return False
+
+
 
 def get_file_size(filename):
     try:
@@ -92,44 +102,14 @@ def get_file_size(filename):
     except:
         return 0
 
-def clean_file(file_to_be_cleaned):
-    x = 0
-    clean_contents = []
-    contents = read_file_(file_to_be_cleaned)
-    for i in contents.split("\n"):
-        if x == 1:
-            if marker_end.strip() in i:
-                x = 0
-            else:
-                continue
-        elif marker_start.strip() in i:
-            x = 1
-            continue
-        else:
-            clean_contents.append(i) 
-    return "\n".join(clean_contents)
-            
-
 
 # The code then checks if there are any files with a size greater than 100000 bytes, and if so it deletes them.
 # If the terminal is closed without saving, the backup is not restored. To ensure doubling of injection, it 
 # will clean the index file, as well  as leave markers on the index file as breadcrums
 
-def read_index_html():
-    filesize = get_file_size(Files.fpath)
-    bsize = get_file_size(Files.backup)
-    if filesize > 100000:
-        export = read_file_(Files.backup)
-    elif (filesize > 0) and (bsize < filesize) and (bsize > 10):
-        export = read_file_(Files.backup)
-    else: 
-        export = read_file_(Files.fpath)
-    # save backup of original
-    with open(Files.temp, 'w') as f:
-        f.write(export)
-    with open(Files.backup, 'w') as f:
-        f.write(export)
-    return export.split('\n')
+
+def minify_(code):
+    return minify_html.minify(code, minify_js=False, remove_processing_instructions=False)
 
 
 def access_directory():
@@ -142,63 +122,77 @@ def access_directory():
 
 
 def restore_backup():
-    file = read_file_(Files.temp)
-    with open(Files.fpath, 'w',
-            errors="ignore") as f:
-        f.write(file)
+    try:
+        file = read_file_(Files.temp)
+        with open(Files.fpath, 'w',
+                errors="ignore") as f:
+            f.write(file)
+    except:
+        return
+
+def read_index_html():
+    filesize = get_file_size(Files.fpath)
+    bsize = get_file_size(Files.backup)
+    if filesize > 100000 and filesize > 0:
+        export = read_file_(Files.fpath)
+    else:
+        export = read_file_(Files.backup)
+
+    # save backup of original
+    with open(Files.temp, 'w', encoding='utf-8', errors='replace') as f:
+        f.write(str(export))
+    with open(Files.backup, 'w', encoding='utf-8', errors='replace') as f:
+        f.write(str(export))
+    return str(export).split('\n')
+
+
+
+def find_css_js_files():
+    for file in Files.dir.rglob("*"):
+        if file.suffix == ".css":
+            css.pather(file)
+        if file.suffix == ".js":
+            js.pather(file) 
+
 
 
 def segment_html(html_lines):
     css_found = False
     js_found = False
-    html_header = []
-    html_body = []
-    html_footer = []
-    _css_ = []
-    _js_ = []
-    new_html = []
-    for line in html_lines:
-        if css_found == False:
-            if lookfor_css in line:
-                _css_.append(read_css(line))  # insert css on marker
-                css_found = True
-                continue
-            else:
-                html_header.append(line)
-                continue
-        elif css_found == True and js_found == False:
-            if lookfor_js in line:
-                _js_.append(read_js(line))  # insert js on marker
-                js_found = True
-                continue
-            else:
-                html_body.append(line)
+    for line in html_lines: 
+        if not css_found:
+            css_found = css_search(line)
+        elif css_found and not js_found:
+            js_found = js_search(line)
         else:
-            html_footer.append(line)
-    class Code:
-        header = html_header
-        css = _css_
-        body = html_body
-        js = _js_
-        footer = html_footer
-    return Code
+            Html.footer_(line)
 
 
 def convert(Files):
     find_css_js_files()
     html_lines = read_index_html()
-    Code = segment_html(html_lines)
-    with open(Files.fpath, 'w', errors="replace") as f:
-        f.write("\n".join(Code.header))
-        f.write("\n".join(Code.css))
-        f.write("\n".join(Code.body))
-        f.write("\n".join(Code.js))
-        f.write("\n".join(Code.footer))
+    segment_html(html_lines)
+    html_file = str(f"{Html.get_header()}"
+            f"{css.code}"
+            f"{Html.get_body()}"
+            f"{js.code}"
+            f"{Html.get_footer()}")
 
+    html_file = minify_html.minify(html_file, minify_js=False, remove_processing_instructions=False)
+    writer(Files.fpath, html_file)
+    return html_file
 
 if __name__ == '__main__':
-    convert(Files)
-    for i in range(8):
-        print(f"{i}")
-        sleep(1)
+    html_file = convert(Files)
+    x = 0
+
+    # writer('index_mini.html', minified)
+    for line in html_file.splitlines():
+        x += 1
+        print(f"{x} => {line}")
+        sleep(0.01)
+    # #####################################
+    # #####################################
     restore_backup()
+    # #####################################
+    # #####################################
