@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%;height: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Contact-Form-by-Moorcam.css">
+</head>
+
+<body style="width: 100%;height: 100%;">
+    <section class="shadow contact-clean" style="background: rgb(3,77,139);width: 100%;height: 100%;padding: 80px 0px;padding-bottom: 2px;min-height: 553px;">
+        <form class="bg-light border rounded border-secondary shadow-lg" method="post" style="background: rgb(248,248,249);width: 500px;">
+            <div class="card" style="width: 383px;height: 499.797px;">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" id="item-1-1-tab" role="tab" aria-controls="item-1-1" aria-selected="true" href="#item-1-1" data-bs-toggle="tab" style="padding-right: 12px;padding-left: 12px;">Active Processes</a></li>
+                        <li class="nav-item"><a class="nav-link" id="item-1-2-tab" role="tab" aria-controls="item-1-2" aria-selected="false" href="#item-1-2" data-bs-toggle="tab" style="padding-right: 4px;padding-left: 4px;">Saved&nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link" id="item-1-3-tab" role="tab" aria-controls="item-1-3" aria-selected="false" href="#item-1-3" data-bs-toggle="tab" style="padding-right: 4px;padding-left: 4px;">Steam Import</a></li>
+                    </ul>
+                </div>
+                <div class="card-body" style="width: 100%;">
+                    <div id="nav-tabContent" class="tab-content">
+                        <div id="item-1-1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="item-1-1-tab">
+                            <h4>Launch Katanga for Geo11</h4>
+                                <div class="form-group mb-3">
+                                <select class="form-select" style="height: 252px;" multiple="" name="process" id="process">
+                                    <optgroup label="These are active processes" name="">
+                                        {% for k, i in data.items() %}
+                                        <option value="{{i.id}}" selected="" id="processes">{{ i.title }}</option>
+                                        {% endfor %} 
+                                    </optgroup>
+                                </select></div>
+                            <p></p><button class="btn btn-primary" type="button" onclick="initialize()">Launch</button>
+                            </div>
+                        <div id="item-1-2" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-2-tab">
+                        <h4>Installed applications</h4>
+                                <div class="form-group mb-3">
+                                <select class="form-select" style="height: 252px;" multiple="" name="process" id="process">
+                                    <optgroup label="These are active processes" name="">
+                                        {% for k, i in installs.items() %}
+                                        <option value="{{ installs[k].name }}" selected="" id="processes">{{ installs[k].name }}</option>
+                                        {% endfor %} 
+                                    </optgroup>
+                                </select></div>
+                            <p></p><button class="btn btn-primary" type="button" onclick="initialize()">Launch</button>
+</div>
+                        <div id="item-1-3" class="tab-pane fade" role="tabpanel" aria-labelledby="item-1-3-tab">
+                            <h4>Launch Katanga for Geo11</h4>
+                                <div class="form-group mb-3">
+                                <select class="form-select" style="height: 252px;" multiple="" name="process" id="process">
+                                    <optgroup label="These are active processes" name="">
+                                        {% for k, i in data.items() %}
+                                        <option value="{{i.id}}" selected="" id="processes">{{ i.title }}</option>
+                                        {% endfor %} 
+                                    </optgroup>
+                                </select></div>
+                            <p></p><button class="btn btn-primary" type="button" onclick="initialize()">Launch</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>   
+        <script>
+    function initialize() {
+  var x = document.getElementById("process").selectedIndex;
+  var y = document.getElementById("process").options;
+  alert("JS Index: " + y[x].index + " is Python ID number " + y[x].value + ". See terminal for path.");
+  pywebview.api.launch_live_process(y[x].value)
+    }</script>         
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
