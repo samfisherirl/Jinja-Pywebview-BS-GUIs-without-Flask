@@ -5,7 +5,7 @@ class Tag:
         self.close = close
         self.lookfor_ = lookfor_
         
-class Paths(Tag):
+class JS_CSS(Tag):
     def __init__(self, open, close, lookfor_):
         super().__init__(open, close, lookfor_)
         self.paths = []
@@ -30,35 +30,21 @@ class Paths(Tag):
 
 class Html:
     def __init__(self):
-        self.header = []
-        self.body = []
-        self.footer = []
+        self.code = []
 
-    def header_(self, line):
-        self.header.append(line)
+    def add_line(self, line):
+        self.code.append(line)
 
-    def get_header(self):
-        return str("\n".join(self.header))
+    def join_lines(self):
+        self.code = str("\n".join(self.code))
 
-    def body_(self, line):
-        self.body.append(line)
-
-    def get_body(self):
-        return str("\n".join(self.body))
-
-    def footer_(self, line):
-        self.footer.append(line)
-
-    def get_footer(self):
-        return str("\n".join(self.footer))
 
     
 
 if __name__ == '__main__':
-    js = Paths('\n<script>\n', f"\n</script>\n")
-    js.pather('nadjgklkjasdfgksdlf')
-    js.construction(["1.txt", "1.txt"])
-    print(js.open)
-    print(js.open)
-    print(js.return_paths)
+    js = JS_CSS('\n<script>\n', "\n</script>\n", r"</body>")
+    js.pather("index.html")
+    js.pather("backup_index.html")
+    js.construction()
+    print(js.code)
 

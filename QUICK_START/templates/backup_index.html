@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <div>
+    <p>
+      {{ title }}
+    </p>
+    <select name="process" id="process" multiple="">
+      <optgroup label="These for loop items" name="process">
+        {% for i in data %}
+        <option value="{{i.item}}" selected="" id="items">{{ i.item }}</option>
+        {% endfor %}
+      </optgroup>
+    </select>
+    <br><br>
+    <button type="button" id="submit" onclick="initialize()">Submit</button>
+  </div>
+  <br><br>
+  {% for items in list %}
+  <p>
+    {{ items }}
+  </p>
+  {% endfor %}
+</body>
+    <script>
+    function initialize() {
+  var x = document.getElementById("process").selectedIndex;
+  var y = document.getElementById("process").options;
+  alert("JS Index: " + y[x].index + " is Python ID number " + y[x].value + ". See terminal for path.");
+  pywebview.api.launch_live_process(y[x].value)
+    }</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</html>

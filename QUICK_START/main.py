@@ -61,6 +61,29 @@ view = template.render(
         ) 
 
 
+class Api:
+    def __init__(self):
+        self.cancel_heavy_stuff_flag = False
+
+    def init(self):
+        response = {
+            'message': 'Hello from Python {0}'.format(sys.version)
+        }
+        return response
+
+
+    def launch_live_process(self, name):
+        response = {
+            'message': 'Hello {0}!'.format(name)
+        }
+        print(response)
+        return response
+
+    def error(self):
+        raise Exception('This is a Python exception')
+
+
+
 # Exit handler to restore the original HTML file
 
 def exit_handler():
@@ -68,8 +91,9 @@ def exit_handler():
     
 
 def start_window():
+    api=Api()
     windowTitle = "My window"
-    webview.create_window(windowTitle, html=view, width=500, height=600, fullscreen=False)
+    webview.create_window(windowTitle, html=view, width=500, height=600, fullscreen=False, js_api=api)
     webview.start()
     atexit.register(exit_handler)
 
