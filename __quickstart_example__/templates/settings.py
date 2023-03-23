@@ -3,13 +3,12 @@ from pathlib import Path
 
 class Files:
 	def __init__(self, workdir, directory, 
-								filename, filepath, 
-								tempname):
+								filename, filepath 
+								):
 		self.workdir = workdir
 		self.dir = directory
 		self.fname = filename
 		self.fpath = filepath
-		self.tname = tempname
 		self.temp = f"temp_{filename}"
 		self.backup = f"backup_{filename}"
 		self.log = directory / "log.txt"

@@ -6,8 +6,6 @@ import atexit
 from templates.settings import Files
 ######################################### 
 
-from templates.settings import file_settings
-
 def file_settings():
 
 		###################
@@ -107,14 +105,14 @@ class Api:
 # Exit handler to restore the original HTML file
 
 def exit_handler():
-    inject_js_css.restore_backup()
+    inject_js_css.restore_backup(Files)
     
 
 def start_window():
     api=Api()
     windowTitle = "My window"
     webview.create_window(windowTitle, html=view, width=500, height=600, fullscreen=False, js_api=api)
-    inject_js_css.restore_backup()
+    inject_js_css.restore_backup(Files)
     webview.start()
     atexit.register(exit_handler)
 

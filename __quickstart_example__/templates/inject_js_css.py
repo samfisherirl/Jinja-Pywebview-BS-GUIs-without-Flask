@@ -23,15 +23,11 @@ import minify_html
 
 from time import sleep
 from pathlib import Path
-from main import file_settings
 try:
-    from templates.settings import file_settings
     from templates.class_construction import JS_CSS, Html
 except:
-    from settings import file_settings
     from class_construction import JS_CSS, Html
 
-Files = file_settings() 
 
 Html_header = Html()
 Html_body = Html()
@@ -46,7 +42,6 @@ Html_footer = Html()
 
 filename = 'index.html'
 
-log = Files.log
 
 js = JS_CSS('\n<script>\n', "\n</script>\n", r"</body>")
 css = JS_CSS('\n<style>\n', "\n</style>\n", r"</head>")
@@ -113,7 +108,7 @@ def minify_(code):
     return minify_html.minify(code, minify_js=False, remove_processing_instructions=False)
 
 
-def access_directory():
+def access_directory(Files):
     return read_file_(Files.log)
 
 
@@ -122,7 +117,7 @@ def access_directory():
 #         f.write(f'{path},{file}')
 
 
-def restore_backup():
+def restore_backup(Files):
     try:
         file = read_file_(Files.temp)
         with open(Files.fpath, 'w',
@@ -131,7 +126,7 @@ def restore_backup():
     except:
         return
 
-def read_index_html():
+def read_index_html(Files):
     export = read_file_(Files.fpath)
     
     writer(Files.temp, export)
@@ -140,7 +135,7 @@ def read_index_html():
 
 
 
-def find_css_js_files():
+def find_css_js_files(Files):
     for file in Files.dir.rglob("*"):
         if file.suffix == ".css":
             css.pather(file)
@@ -165,8 +160,8 @@ def insert_html(html_lines):
 
 
 def convert(Files):
-    find_css_js_files()
-    html_lines = read_index_html()
+    find_css_js_files(Files)
+    html_lines = read_index_html(Files)
     insert_html(html_lines)
     html_file = str(f"{Html_header.code}"
             f"{css.code}"
