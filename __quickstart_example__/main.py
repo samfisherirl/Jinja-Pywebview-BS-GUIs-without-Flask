@@ -3,10 +3,33 @@ from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoad
 import webview
 from templates import inject_js_css as inject_js_css 
 import atexit
-
+from templates.settings import Files
 ######################################### 
 
 from templates.settings import file_settings
+
+def file_settings():
+
+		###################
+		# working directory
+		workdir = Path.cwd()
+		###################
+		if "templates" in str(workdir): 
+			# if user specifies the templates directory
+			directory = workdir
+		else:
+			directory = workdir / 'templates' 
+		###################
+		filename = "index.html"
+		###################
+		filepath = directory / filename
+		###################
+		
+#####################################
+		return Files(workdir, 
+				directory,
+				filename, 
+				filepath)
 
 Files = file_settings()
 
