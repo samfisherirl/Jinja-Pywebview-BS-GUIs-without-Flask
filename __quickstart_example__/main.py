@@ -26,10 +26,7 @@ def file_settings():
 		###################
 		
 #####################################
-		return Files(workdir, 
-				directory,
-				filename, 
-				filepath)
+		return Files(workdir, directory, filename, filepath)
 
 Files = file_settings()
 
@@ -117,6 +114,7 @@ def start_window():
     api=Api()
     windowTitle = "My window"
     webview.create_window(windowTitle, html=view, width=500, height=600, fullscreen=False, js_api=api)
+    inject_js_css.restore_backup()
     webview.start()
     atexit.register(exit_handler)
 

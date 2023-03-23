@@ -23,7 +23,7 @@ import minify_html
 
 from time import sleep
 from pathlib import Path
-
+from main import file_settings
 try:
     from templates.settings import file_settings
     from templates.class_construction import JS_CSS, Html
@@ -132,19 +132,8 @@ def restore_backup():
         return
 
 def read_index_html():
-    try:
-        bsize = get_file_size(Files.backup)
-        filesize = get_file_size(Files.fpath)
-    except:
-        filesize = get_file_size(Files.fpath)
-    try:
-        if filesize < 100000 and filesize > 0:
-            export = read_file_(Files.fpath)
-        else:
-            export = read_file_(Files.backup)
-    except:
-        export = read_file_(Files.fpath)
-    # save backup of original
+    export = read_file_(Files.fpath)
+    
     writer(Files.temp, export)
     writer(Files.backup, export)
     return str(export).split('\n')
