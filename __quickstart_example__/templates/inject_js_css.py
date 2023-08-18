@@ -157,18 +157,17 @@ def insert_html(html_lines):
     Html_header.join_lines()
     Html_body.join_lines()
     Html_footer.join_lines()
-
-
-def convert(Files):
-    find_css_js_files(Files)
-    html_lines = read_index_html(Files)
-    insert_html(html_lines)
-    html_file = str(f"{Html_header.code}"
+    return str(f"{Html_header.code}"
             f"{css.code}"
             f"{Html_body.code}"
             f"{js.code}"
             f"{Html_footer.code}")
 
+
+def convert(Files):
+    find_css_js_files(Files)
+    html_lines = read_index_html(Files)
+    html_file = insert_html(html_lines)
     html_file = minify_(html_file)
     writer(Files.fpath, html_file)
     return html_file
