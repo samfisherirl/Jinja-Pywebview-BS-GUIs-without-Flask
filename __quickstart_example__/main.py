@@ -4,38 +4,22 @@ import webview
 from templates import inject_js_css as inject_js_css 
 import atexit
 from templates.settings import Files
-######################################### 
 
 def file_settings():
-
-		###################
-		# working directory
 		workdir = Path.cwd()
-		###################
 		if "templates" in str(workdir): 
 			# if user specifies the templates directory
 			directory = workdir
 		else:
 			directory = workdir / 'templates' 
-		###################
 		filename = "index.html"
-		###################
 		filepath = directory / filename
-		###################
-		
-#####################################
 		return Files(workdir, directory, filename, filepath)
 
 Files = file_settings()
-
-#########################################
-# Inject CSS and JS files into the HTML
-
 inject_js_css.convert(Files)
 
-#########################################
-# Inject CSS and JS files into the HTML
-#########################################
+#####################################
 
 items = ["apple", "bannana", "peach"]
 
@@ -51,11 +35,8 @@ def construct_objs():
 
 
 #########################################
-
 data = construct_objs()
-
 list = items
-
 ######################################### 
 
 # Create the environment
