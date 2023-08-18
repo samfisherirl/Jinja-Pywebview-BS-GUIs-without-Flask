@@ -56,7 +56,7 @@ template = env.get_template(Files.fname)
 view = template.render(
         data = data,
         list = list,
-        title = "To render the variables, insert the placeholder between {{}}"
+        title = "This is a Python variable. To render the variables, insert the placeholder between {{}}"
         ) 
 
 
@@ -66,7 +66,7 @@ class Api:
 
     def init(self):
         response = {
-            'message': 'Hello from Python {0}'.format(sys.version)
+            'message': 'Hello from Python'
         }
         return response
 
