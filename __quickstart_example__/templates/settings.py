@@ -9,8 +9,8 @@ class Files:
 		self.dir = directory
 		self.fname = filename
 		self.fpath = filepath
-		self.temp = f"temp_{filename}"
-		self.backup = f"backup_{filename}"
+		self.temp = directory / f"temp_{filename}"
+		self.backup = directory / f"backup_{filename}"
 		self.log = directory / "log.txt"
  
 #####################################
